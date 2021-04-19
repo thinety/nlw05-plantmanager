@@ -1,0 +1,12 @@
+import React from 'react';
+import { Welcome } from './pages/Welcome';
+
+
+function App() {
+  return (
+    <Welcome />
+  );
+}
+
+
+export { App };
