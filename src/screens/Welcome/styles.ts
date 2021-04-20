@@ -1,18 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 import { colors } from '../../styles/colors';
+import { fonts } from '../../styles/fonts';
 
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  wrapper: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    paddingHorizontal: 20,
   },
 
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
+    fontSize: 28,
+    fontFamily: fonts.heading,
+    lineHeight: 34,
     textAlign: 'center',
     color: colors.heading,
     marginTop: 38,
@@ -21,6 +28,7 @@ const styles = StyleSheet.create({
   subtitle: {
     textAlign: 'center',
     fontSize: 18,
+    fontFamily: fonts.text,
     paddingHorizontal: 20,
     color: colors.heading,
   },
@@ -35,14 +43,13 @@ const styles = StyleSheet.create({
     width: 56,
   },
 
-  buttonText: {
+  buttonIcon: {
+    fontSize: 32,
     color: colors.white,
-    fontSize: 24,
   },
 
   image: {
-    width: 292,
-    height: 284,
+    height: Dimensions.get('window').width * 0.7,
   },
 });
 
