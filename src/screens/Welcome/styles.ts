@@ -7,10 +7,6 @@ import { fonts } from '../../styles/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  wrapper: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
     paddingHorizontal: 20,
@@ -22,7 +18,10 @@ const styles = StyleSheet.create({
     lineHeight: 34,
     textAlign: 'center',
     color: colors.heading,
-    marginTop: 38,
+  },
+
+  image: {
+    height: Dimensions.get('window').width * 0.7,
   },
 
   subtitle: {
@@ -38,7 +37,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 16,
-    marginBottom: 10,
     height: 56,
     width: 56,
   },
@@ -46,10 +44,6 @@ const styles = StyleSheet.create({
   buttonIcon: {
     fontSize: 32,
     color: colors.white,
-  },
-
-  image: {
-    height: Dimensions.get('window').width * 0.7,
   },
 });
 

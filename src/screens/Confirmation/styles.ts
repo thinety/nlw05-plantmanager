@@ -7,11 +7,6 @@ import { fonts } from '../../styles/fonts';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
-  },
-
-  content: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 30,

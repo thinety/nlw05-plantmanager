@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { SafeAreaView, KeyboardAvoidingView, TouchableWithoutFeedback, Text, TextInput, Keyboard, Platform } from 'react-native';
+import { KeyboardAvoidingView, TouchableWithoutFeedback, Text, TextInput, Keyboard, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { UserIdentificationProps } from '../../types/navigation';
 
 import { Button } from '../../components/Button';
 
 import { styles } from './styles';
-import {  } from 'react-native-gesture-handler';
 
 
 function UserIdentification({ navigation }: UserIdentificationProps) {

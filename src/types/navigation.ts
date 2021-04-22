@@ -6,6 +6,7 @@ type RootStackNavigatorParamList = {
   Welcome: undefined,
   UserIdentification: undefined,
   Confirmation: undefined,
+  PlantSelect: undefined,
 };
 
 interface WelcomeProps {
@@ -23,6 +24,11 @@ interface ConfirmationProps {
   navigation: StackNavigationProp<RootStackNavigatorParamList, 'Confirmation'>;
 }
 
+interface PlantSelectProps {
+  route: RouteProp<RootStackNavigatorParamList, 'PlantSelect'>;
+  navigation: StackNavigationProp<RootStackNavigatorParamList, 'PlantSelect'>;
+}
+
 
 export type {
   RootStackNavigatorParamList,
@@ -30,4 +36,5 @@ export type {
   WelcomeProps,
   UserIdentificationProps,
   ConfirmationProps,
+  PlantSelectProps
 };
