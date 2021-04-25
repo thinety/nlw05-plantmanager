@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, TouchableWithoutFeedback, Text, TextInput, Keyboard, Platform } from 'react-native';
+import { KeyboardAvoidingView, TouchableWithoutFeedback, Text, TextInput, Keyboard, Platform, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import type { UserIdentificationProps } from '../../types/navigation';
 
@@ -45,13 +46,25 @@ function UserIdentification({ navigation }: UserIdentificationProps) {
           />
           <Button
             style={styles.button}
-            onPress={() => {
-              navigation.navigate('Confirmation');
+            label='Confirmar'
+            onPress={async () => {
+              try {
+                await AsyncStorage.setItem('@plantmanager:user', name);
+              } catch {
+                Alert.alert('Não foi possível salvar o seu nome. 😢');
+                return;
+              }
+
+              navigation.navigate('Confirmation', {
+                emoji: '😁',
+                title: 'Prontinho',
+                subtitle: 'Agora vamos começar a cuidar das suas plantinhas com muito cuidado.',
+                button: 'Começar',
+                nextScreen: 'PlantSelect',
+              });
             }}
             disabled={!isFilled}
-          >
-            Confirmar
-          </Button>
+          />
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </SafeAreaView>

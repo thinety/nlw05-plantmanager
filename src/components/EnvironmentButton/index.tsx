@@ -2,7 +2,6 @@ import React from 'react';
 import { Pressable, Text, View } from 'react-native';
 import type { StyleProp, ViewStyle } from 'react-native';
 
-import { androidRipple } from '../../styles/common';
 import { styles } from './styles';
 
 
@@ -17,7 +16,7 @@ function EnvironmentButton({ style, onPress, label, active = false }: Environmen
   return (
     <View style={[styles.container, active && styles.containerActive, style]}>
       <Pressable style={styles.button}
-        android_ripple={androidRipple}
+        android_ripple={{ borderless: true }}
         onPress={onPress}
       >
         <Text style={[styles.label, active && styles.labelActive]}>

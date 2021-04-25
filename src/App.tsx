@@ -13,7 +13,8 @@ import type { RootStackNavigatorParamList, StackNavigationOptions } from './type
 import { Welcome } from './screens/Welcome';
 import { UserIdentification } from './screens/UserIdentification';
 import { Confirmation } from './screens/Confirmation';
-import { PlantSelect } from './screens/PlantSelect';
+import { PlantSave } from './screens/PlantSave';
+import { Main } from './screens/Main';
 
 import { colors } from './styles/colors';
 
@@ -52,8 +53,12 @@ function App() {
             component={Confirmation}
           />
           <RootStack.Screen
-            name='PlantSelect'
-            component={PlantSelect}
+            name='PlantSave'
+            component={PlantSave}
+          />
+          <RootStack.Screen
+            name='Main'
+            component={Main}
           />
         </RootStack.Navigator>
       </NavigationContainer>

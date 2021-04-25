@@ -6,13 +6,13 @@ import { styles } from './styles';
 
 
 interface ButtonProps {
-  children: string;
+  label: string;
   style?: StyleProp<ViewStyle>
   onPress: () => void;
   disabled?: boolean;
 }
 
-function Button({ children, style, onPress, disabled = false }: ButtonProps) {
+function Button({ label, style, onPress, disabled = false }: ButtonProps) {
   return (
     <TouchableOpacity
       style={[
@@ -25,7 +25,7 @@ function Button({ children, style, onPress, disabled = false }: ButtonProps) {
       activeOpacity={0.7}
     >
       <Text style={styles.text}>
-        {children}
+        {label}
       </Text>
     </TouchableOpacity>
   );

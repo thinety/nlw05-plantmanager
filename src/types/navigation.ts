@@ -1,12 +1,33 @@
-import type { RouteProp } from '@react-navigation/native';
+import type { RouteProp, CompositeNavigationProp } from '@react-navigation/native';
 import type { StackNavigationOptions, StackNavigationProp } from '@react-navigation/stack';
+import type { BottomTabNavigationOptions, BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 
 type RootStackNavigatorParamList = {
   Welcome: undefined,
   UserIdentification: undefined,
-  Confirmation: undefined,
-  PlantSelect: undefined,
+  Confirmation: {
+    emoji: string,
+    title: string,
+    subtitle: string,
+    button: string,
+    nextScreen: keyof MainTabsNavigatorParamList,
+  },
+  PlantSave: {
+    plant: {
+      id: string,
+      name: string,
+      about: string,
+      water_tips: string,
+      photo: string,
+      environments: string[],
+      frequency: {
+        times: number,
+        repeat_every: string,
+      },
+    }
+  },
+  Main: undefined,
 };
 
 interface WelcomeProps {
@@ -24,9 +45,36 @@ interface ConfirmationProps {
   navigation: StackNavigationProp<RootStackNavigatorParamList, 'Confirmation'>;
 }
 
+interface PlantSaveProps {
+  route: RouteProp<RootStackNavigatorParamList, 'PlantSave'>;
+  navigation: StackNavigationProp<RootStackNavigatorParamList, 'PlantSave'>;
+}
+
+interface MainProps {
+  route: RouteProp<RootStackNavigatorParamList, 'Main'>;
+  navigation: StackNavigationProp<RootStackNavigatorParamList, 'Main'>;
+}
+
+
+type MainTabsNavigatorParamList = {
+  PlantSelect: undefined,
+  MyPlants: undefined,
+};
+
 interface PlantSelectProps {
-  route: RouteProp<RootStackNavigatorParamList, 'PlantSelect'>;
-  navigation: StackNavigationProp<RootStackNavigatorParamList, 'PlantSelect'>;
+  route: RouteProp<MainTabsNavigatorParamList, 'PlantSelect'>;
+  navigation: CompositeNavigationProp<
+    BottomTabNavigationProp<MainTabsNavigatorParamList, 'PlantSelect'>,
+    StackNavigationProp<RootStackNavigatorParamList, 'Main'>
+  >;
+}
+
+interface MyPlantsProps {
+  route: RouteProp<MainTabsNavigatorParamList, 'MyPlants'>;
+  navigation: CompositeNavigationProp<
+    BottomTabNavigationProp<MainTabsNavigatorParamList, 'MyPlants'>,
+    StackNavigationProp<RootStackNavigatorParamList, 'Main'>
+  >;
 }
 
 
@@ -36,5 +84,11 @@ export type {
   WelcomeProps,
   UserIdentificationProps,
   ConfirmationProps,
-  PlantSelectProps
+  PlantSaveProps,
+  MainProps,
+
+  MainTabsNavigatorParamList,
+  BottomTabNavigationOptions,
+  PlantSelectProps,
+  MyPlantsProps,
 };

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, ScrollView, FlatList, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialIcons } from '@expo/vector-icons';
 
-import type { PlantSelectProps } from '../../types/navigation';
+import type { BottomTabNavigationOptions, PlantSelectProps } from '../../types/navigation';
 
 import { Header } from '../../components/Header';
 import { EnvironmentButton } from '../../components/EnvironmentButton';
@@ -32,7 +33,17 @@ type Plant = {
   },
 };
 
-function PlantSelect({}: PlantSelectProps) {
+const plantSelectOptions: BottomTabNavigationOptions = {
+  tabBarIcon: ({ size, color }) => (
+    <MaterialIcons
+      name='add-circle-outline'
+      size={size}
+      color={color}
+    />
+  ),
+};
+
+function PlantSelect({ navigation }: PlantSelectProps) {
   const [environments, setEnvironments] = useState<Environment[]>([]);
   const [loadingEnvironments, setLoadingEnvironments] = useState(true);
   const [plants, setPlants] = useState<Plant[]>([]);
@@ -131,7 +142,9 @@ function PlantSelect({}: PlantSelectProps) {
               style={styles.plantCard}
               name={plant.name}
               photo={plant.photo}
-              onPress={() => {}}
+              onPress={() => {
+                navigation.navigate('PlantSave', { plant });
+              }}
             />
           )}
           numColumns={2}
@@ -151,4 +164,4 @@ function PlantSelect({}: PlantSelectProps) {
 }
 
 
-export { PlantSelect };
+export { PlantSelect, plantSelectOptions };

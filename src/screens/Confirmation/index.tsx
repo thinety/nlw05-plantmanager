@@ -9,22 +9,23 @@ import { Button } from '../../components/Button';
 import { styles } from './styles';
 
 
-function Confirmation({ navigation }: ConfirmationProps) {
+function Confirmation({ route, navigation }: ConfirmationProps) {
+  const { emoji, title, subtitle, button, nextScreen } = route.params;
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.emoji}>😁</Text>
-      <Text style={styles.title}>Prontinho</Text>
-      <Text style={styles.subtitle}>
-        Agora vamos começar a cuidar das suas plantinhas com muito cuidado.
-      </Text>
+      <Text style={styles.emoji}>{emoji}</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.subtitle}>{subtitle}</Text>
       <Button
         style={styles.button}
+        label={button}
         onPress={() => {
-          navigation.navigate('PlantSelect');
+          navigation.navigate('Main', {
+            screen: nextScreen
+          } as unknown as undefined);
         }}
-      >
-        Começar
-      </Button>
+      />
     </SafeAreaView>
   );
 }
