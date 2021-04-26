@@ -34,6 +34,7 @@ type Plant = {
 };
 
 const plantSelectOptions: BottomTabNavigationOptions = {
+  tabBarLabel: 'Nova planta',
   tabBarIcon: ({ size, color }) => (
     <MaterialIcons
       name='add-circle-outline'

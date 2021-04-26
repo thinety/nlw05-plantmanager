@@ -5,6 +5,24 @@ import { fonts } from '../../styles/fonts';
 
 
 const styles = StyleSheet.create({
+  removeButtonContainer: {
+    flex: 1,
+    backgroundColor: colors.red,
+    marginVertical: 15,
+    borderRadius: 20,
+    position: 'relative',
+    right: 20,
+    marginRight: -20,
+  },
+
+  removeButton: {
+    flex: 1,
+    width: 100,
+    paddingLeft: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
   container: {
     backgroundColor: colors.shape,
     borderRadius: 20,

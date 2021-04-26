@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, FlatList } from 'react-native';
+import { View, Image, Text, FlatList, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { formatDistance } from 'date-fns';
@@ -9,7 +9,7 @@ import type { BottomTabNavigationOptions, MyPlantsProps } from '../../types/navi
 
 import { Header } from '../../components/Header';
 
-import { loadPlants } from '../../services/storage';
+import { loadPlants, removePlant } from '../../services/storage';
 
 import waterdropImg from '../../../assets/waterdrop.png';
 import { styles } from './styles';
@@ -28,9 +28,11 @@ type Plant = {
     repeat_every: string,
   },
   time: string,
+  dateTimeNotification: Date,
 };
 
 const myPlantsOptions: BottomTabNavigationOptions = {
+  tabBarLabel: 'Minhas plantinhas',
   tabBarIcon: ({ size, color }) => (
     <MaterialIcons
       name='format-list-bulleted'
@@ -42,25 +44,23 @@ const myPlantsOptions: BottomTabNavigationOptions = {
 
 function MyPlants({}: MyPlantsProps) {
   const [myPlants, setMyPlants] = useState<Plant[]>([]);
-  const [nextWatered, setNextWatered] = useState('');
+
+  let nextWatered = '';
+
+  const nextWateredPlant = myPlants[0];
+  if (nextWateredPlant !== undefined) {
+    const nextTime = formatDistance(
+      nextWateredPlant.dateTimeNotification.getTime(),
+      new Date().getTime(),
+      { locale: ptBR }
+    );
+    nextWatered = `Regue sua ${nextWateredPlant.name} daqui a ${nextTime}`;
+  }
 
   useEffect(() => {
     (async () => {
       const plants = await loadPlants();
-
       setMyPlants(plants);
-
-      const nextWateredPlant = plants[0];
-
-      const nextTime = formatDistance(
-        nextWateredPlant.dateTimeNotification.getTime(),
-        new Date().getTime(),
-        { locale: ptBR }
-      );
-
-      setNextWatered(
-        `Regue sua ${nextWateredPlant.name} daqui a ${nextTime}`
-      );
     })();
   }, []);
 
@@ -86,8 +86,6 @@ function MyPlants({}: MyPlantsProps) {
 
         <FlatList
           data={myPlants}
-          // bug here: id is not unique if the same
-          // plant is registered twice
           keyExtractor={plant => plant.id}
           renderItem={({ item: plant }) => (
             <WateringCard
@@ -95,6 +93,28 @@ function MyPlants({}: MyPlantsProps) {
               photo={plant.photo}
               hour={plant.time}
               onPress={() => {}}
+              onRemove={() => {
+                Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
+                  {
+                    text: 'Não 🙏',
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'Sim 😢',
+                    onPress: async () => {
+                      try {
+                        await removePlant(plant.id);
+                      } catch {
+                        Alert.alert('Não foi possível remover a planta. 😢');
+                        return;
+                      }
+
+                      const plants = await loadPlants();
+                      setMyPlants(plants);
+                    },
+                  }
+                ]);
+              }}
             />
           )}
           showsVerticalScrollIndicator={false}

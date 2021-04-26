@@ -70,14 +70,15 @@ const styles = StyleSheet.create({
     fontFamily: fonts.complement,
     color: colors.heading,
     fontSize: 12,
-    marginBottom: 5,
+    marginTop: 20,
   },
 
   timePickerContainer: {
     backgroundColor: colors.green_light,
     borderRadius: 20,
 
-    marginVertical: 30,
+    marginTop: 10,
+    marginBottom: 30,
     alignSelf: 'center',
   },
 
